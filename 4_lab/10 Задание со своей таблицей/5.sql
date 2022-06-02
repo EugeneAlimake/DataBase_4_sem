@@ -1,0 +1,17 @@
+use NE_MyBASE;
+SELECT ТОВАРЫ.Название_товаров, ЗАКАЗЫ.Дата_продажи,
+Case
+when(ЗАКАЗЫ.Цена_заказанного_товара between 1 and 50) then 'цена<50'
+when (ЗАКАЗЫ.Цена_заказанного_товара between 50 and 100) then 'цена от 50 до 100'
+else 'цена больше 100'
+end [Пределы цен]
+From ТОВАРЫ inner join ЗАКАЗЫ
+ON ТОВАРЫ.ID_товара=ЗАКАЗЫ.ID_товара 
+ORDER BY 
+(
+Case 
+when(ЗАКАЗЫ.Цена_заказанного_товара between 1 and 50) then 3
+when (ЗАКАЗЫ.Цена_заказанного_товара between 50 and 100) then 1
+else 2
+end
+)
